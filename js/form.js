@@ -1,5 +1,8 @@
 'use strict';
 (function () {
+  var DEFAULT_PIN_VALUE = 100;
+  var DEFAULT_BAR_WIDTH = 453;
+
   var uploadOpen = document.querySelector('#upload-file');
   var uploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadClose = uploadOverlay.querySelector('.img-upload__cancel');
@@ -12,6 +15,7 @@
   var sliderBar = uploadOverlay.querySelector('.img-upload__effect-level');
   var hashtags = [];
   var hashtagsInput = uploadOverlay.querySelector('.text__hashtags');
+  var effectDepth = uploadOverlay.querySelector('.effect-level__depth');
 
   var getGrayscale = function (currentEffectPinValue) {
     return 'grayscale(' + 0.01 * currentEffectPinValue + ')';
@@ -75,6 +79,9 @@
 
   var filterChangeHandler = function (evt) {
     uploadPreview.style.filter = '';
+    effectPin.style.left = DEFAULT_BAR_WIDTH + 'px';
+    window.slider = DEFAULT_BAR_WIDTH;
+    effectDepth.style.width = DEFAULT_PIN_VALUE + '%';
     effectPinValue = window.data.DEFAULT_EFFECT_VALUE;
     saveEffectValue();
     uploadPreview.classList.remove('effects__preview--' + currentEffect);
@@ -92,7 +99,7 @@
   };
 
   var effectChangeHandler = function () {
-    effectPinValue = window.util.getRandomNumber(0, 100);
+    effectPinValue = window.slider;
     getEffect(currentEffect);
     saveEffectValue();
   };
@@ -134,6 +141,9 @@
   });
 
   effectsList.addEventListener('change', filterChangeHandler);
-  effectPin.addEventListener('mouseup', effectChangeHandler);
   hashtagsInput.addEventListener('input', hashtagsValidateHandler);
+
+  window.form = {
+    effectChangeHandler: effectChangeHandler
+  };
 })();
