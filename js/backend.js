@@ -4,7 +4,7 @@
   var RESPONSE_TYPE = 'json';
   var SUCCESS_STATUS = 200;
   var SERVER_TIMEOUT = 10000;
-  var GET_URL = 'https://js.dump.academy/kekstagram/data';
+  var GET_URL = 'https://javascript.pages.academy/kekstagram/data';
   var LOAD_METHOD = 'GET';
 
   var load = function (successHandler, errorHandler) {
